@@ -1,0 +1,63 @@
+> db.user.insertMany([
+... {name:"atul",email:"atulrawat73@gmail.com" ,city:"vijaypur",price:"1000"},
+...  {name:"rawat",email:"rawat73@gmail.com" ,city:"gwalior",price:"3000"},
+...  {name:"nirpal",email:"nirpalrawat84@gmail.com" , city:"sheopur",price:"5000"},
+...  {name:"dileep",email:"dileeprawat73@gmail.com" ,city:"gwalior",price:"7000"},
+...  {name:"sumit",email:"sumit34@gmail.com" ,city:"morena",price:"9000"}
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66957a9150543dfc33728d75"),
+                ObjectId("66957a9150543dfc33728d76"),
+                ObjectId("66957a9150543dfc33728d77"),
+                ObjectId("66957a9150543dfc33728d78"),
+                ObjectId("66957a9150543dfc33728d79")
+        ]
+}
+> db.user.find()
+{ "_id" : ObjectId("66957a9150543dfc33728d75"), "name" : "atul", "email" : "atulrawat73@gmail.com", "city" : "vijaypur", "price" : "1000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d76"), "name" : "rawat", "email" : "rawat73@gmail.com", "city" : "gwalior", "price" : "3000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d77"), "name" : "nirpal", "email" : "nirpalrawat84@gmail.com", "city" : "sheopur", "price" : "5000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d78"), "name" : "dileep", "email" : "dileeprawat73@gmail.com", "city" : "gwalior", "price" : "7000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d79"), "name" : "sumit", "email" : "sumit34@gmail.com", "city" : "morena", "price" : "9000" }
+>
+> db.user.find({ "_id" : ObjectId("66957a9150543dfc33728d77")})
+{ "_id" : ObjectId("66957a9150543dfc33728d77"), "name" : "nirpal", "email" : "nirpalrawat84@gmail.com", "city" : "sheopur", "price" : "5000" }
+>
+> db.user.find({"_id" : ObjectId("66957a9150543dfc33728d75")})
+{ "_id" : ObjectId("66957a9150543dfc33728d75"), "name" : "atul", "email" : "atulrawat73@gmail.com", "city" : "vijaypur", "price" : "1000" }
+>
+>
+> db.user.updateOne({"_id" : ObjectId("66957a9150543dfc33728d75")},{$set:{"city":"bangrod"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.user.find({"_id" : ObjectId("66957a9150543dfc33728d75")})
+{ "_id" : ObjectId("66957a9150543dfc33728d75"), "name" : "atul", "email" : "atulrawat73@gmail.com", "city" : "bangrod", "price" : "1000" }
+>
+>
+> db.user.find().limit(1)
+{ "_id" : ObjectId("66957a9150543dfc33728d75"), "name" : "atul", "email" : "atulrawat73@gmail.com", "city" : "bangrod", "price" : "1000" }
+>
+>
+> db.user.find().count()
+5
+>
+> db.user.find().sort({price:1})
+{ "_id" : ObjectId("66957a9150543dfc33728d75"), "name" : "atul", "email" : "atulrawat73@gmail.com", "city" : "bangrod", "price" : "1000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d76"), "name" : "rawat", "email" : "rawat73@gmail.com", "city" : "gwalior", "price" : "3000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d77"), "name" : "nirpal", "email" : "nirpalrawat84@gmail.com", "city" : "sheopur", "price" : "5000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d78"), "name" : "dileep", "email" : "dileeprawat73@gmail.com", "city" : "gwalior", "price" : "7000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d79"), "name" : "sumit", "email" : "sumit34@gmail.com", "city" : "morena", "price" : "9000" }
+>
+>
+> db.user.find().skip(1)
+{ "_id" : ObjectId("66957a9150543dfc33728d76"), "name" : "rawat", "email" : "rawat73@gmail.com", "city" : "gwalior", "price" : "3000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d77"), "name" : "nirpal", "email" : "nirpalrawat84@gmail.com", "city" : "sheopur", "price" : "5000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d78"), "name" : "dileep", "email" : "dileeprawat73@gmail.com", "city" : "gwalior", "price" : "7000" }
+{ "_id" : ObjectId("66957a9150543dfc33728d79"), "name" : "sumit", "email" : "sumit34@gmail.com", "city" : "morena", "price" : "9000" }
+>
+>
+>
+> db.user.find().sort({"price":-1}).limit(1)
+{ "_id" : ObjectId("66957a9150543dfc33728d79"), "name" : "sumit", "email" : "sumit34@gmail.com", "city" : "morena", "price" : "9000" }
+>

@@ -1,0 +1,298 @@
+> db.edu.insertMany([
+...  {name:"dileep",city:"gwalior", price:3000},
+...  {name:"ram",city:"delhi", price:5000},
+...  {name:"raj",city:"bhopal", price:6000},
+...  {name:"vikas",city:"noida", price:9000}
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66ad2adab6df509f0478ed06"),
+                ObjectId("66ad2adab6df509f0478ed07"),
+                ObjectId("66ad2adab6df509f0478ed08"),
+                ObjectId("66ad2adab6df509f0478ed09")
+        ]
+}
+>
+>
+> db.edu.find()
+{ "_id" : ObjectId("66ad2adab6df509f0478ed06"), "name" : "dileep", "city" : "gwalior", "price" : 3000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "ram", "city" : "delhi", "price" : 5000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.deleteOne({ "_id" : ObjectId("66ad2adab6df509f0478ed06")}
+... )
+{ "acknowledged" : true, "deletedCount" : 1 }
+>
+> db.edu.find()
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "ram", "city" : "delhi", "price" : 5000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.updateOne({ "_id" : ObjectId("66ad2adab6df509f0478ed07")},{$set:{name:"rawat",price:12000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+>
+> db.edu.find()
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.find().limit(1)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+>
+> db.edu.find().limit(2)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+> db.edu.count()
+3
+>
+>
+> db.edu.find().skip(1)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.find().skip(2)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.find().sort({price:-1})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+>
+> db.edu.find().sort({price:+1})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+>
+>
+>
+> db.edu.find().sort({price:-1}).limit(2)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.find().sort({price:-1}).limit(1).skip(1)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.find().sort({price:-1}).limit(3).skip(1)
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+>
+> db.edu.find()
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.find({name:{$in:["rawat","raj"]}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+> db.edu.find({price:{$in:[12000,9000]}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.find({city:{$in:["delhi","bhopal"]}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+> db.edu.find({price:{$lt:9000}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+>
+> db.edu.find({price:{$lte:9000}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.find({price:{$gt:6000}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+> db.edu.find({price:{$gte:6000}})
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07"), "name" : "rawat", "city" : "delhi", "price" : 12000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08"), "name" : "raj", "city" : "bhopal", "price" : 6000 }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09"), "name" : "vikas", "city" : "noida", "price" : 9000 }
+>
+>
+> db.edu.insertMany([
+... {cust_id:1,amount:300,status:"A"},
+... {cust_id:1,amount:300,status:"A"},
+... {cust_id:1,amount:400,status:"A"},
+... {cust_id:1,amount:300,status:"B"},
+... {cust_id:1,amount:300,status:"A"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66ad2e41b6df509f0478ed0a"),
+                ObjectId("66ad2e41b6df509f0478ed0b"),
+                ObjectId("66ad2e41b6df509f0478ed0c"),
+                ObjectId("66ad2e41b6df509f0478ed0d"),
+                ObjectId("66ad2e41b6df509f0478ed0e")
+        ]
+}
+>
+> db.edu.aggregate([
+... {$match:{status:"A"}},
+... {$group:{_id:"cust_id",amount:{$sum:"$amount"}}},
+... ])
+{ "_id" : "cust_id", "amount" : 1300 }
+>
+>
+> db.edu.aggregate([
+... {$project:{status:1,amount:1}}
+... ])
+{ "_id" : ObjectId("66ad2adab6df509f0478ed07") }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed08") }
+{ "_id" : ObjectId("66ad2adab6df509f0478ed09") }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0a"), "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0b"), "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0c"), "amount" : 400, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0d"), "amount" : 300, "status" : "B" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0e"), "amount" : 300, "status" : "A" }
+>
+>
+> db.edu.aggregate([ {$project:{status:1,amount:1}} ])
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0a"), "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0b"), "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0c"), "amount" : 400, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0d"), "amount" : 300, "status" : "B" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0e"), "amount" : 300, "status" : "A" }
+>
+>
+>
+> db.edu.aggregate([ {$project:{amount:0}} ])
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0a"), "cust_id" : 1, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0b"), "cust_id" : 1, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0c"), "cust_id" : 1, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0d"), "cust_id" : 1, "status" : "B" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0e"), "cust_id" : 1, "status" : "A" }
+>
+>
+> db.edu.renameCollection("edu123")
+{ "ok" : 1 }
+>
+> db.edu123.find()
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0a"), "cust_id" : 1, "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0b"), "cust_id" : 1, "amount" : 300, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0c"), "cust_id" : 1, "amount" : 400, "status" : "A" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0d"), "cust_id" : 1, "amount" : 300, "status" : "B" }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0e"), "cust_id" : 1, "amount" : 300, "status" : "A" }
+>
+>
+> db.edu123.updateMany({},{$rename:{"amount":"price"}})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+>
+> db.edu123.find()
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0a"), "cust_id" : 1, "status" : "A", "price" : 300 }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0b"), "cust_id" : 1, "status" : "A", "price" : 300 }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0c"), "cust_id" : 1, "status" : "A", "price" : 400 }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0d"), "cust_id" : 1, "status" : "B", "price" : 300 }
+{ "_id" : ObjectId("66ad2e41b6df509f0478ed0e"), "cust_id" : 1, "status" : "A", "price" : 300 }
+>
+>
+> db.inventory.insertMany([
+... {item:"computer",qty:5,price:200,stock:"instock"},
+... {item:"mobile",qty:5,price:200,stock:"instock"},
+... {item:"laptop",qty:5,price:300,stock:"instock"},
+... {item:"tv",qty:5,price:200,stock:"instock"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66ad32aeb6df509f0478ed0f"),
+                ObjectId("66ad32aeb6df509f0478ed10"),
+                ObjectId("66ad32aeb6df509f0478ed11"),
+                ObjectId("66ad32aeb6df509f0478ed12")
+        ]
+}
+>
+> db.orders.insertMany([
+... {item:"computer",qty:2,price:200},
+... {item:"mobile",qty:2,price:200},
+... {item:"laptop",qty:2,price:300},
+... {item:"tv",qty:1,price:500}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66ad3401b6df509f0478ed13"),
+                ObjectId("66ad3401b6df509f0478ed14"),
+                ObjectId("66ad3401b6df509f0478ed15"),
+                ObjectId("66ad3401b6df509f0478ed16")
+        ]
+}
+>
+> db.inventory.find()
+{ "_id" : ObjectId("66ad32aeb6df509f0478ed0f"), "item" : "computer", "qty" : 5, "price" : 200, "stock" : "instock" }
+{ "_id" : ObjectId("66ad32aeb6df509f0478ed10"), "item" : "mobile", "qty" : 5, "price" : 200, "stock" : "instock" }
+{ "_id" : ObjectId("66ad32aeb6df509f0478ed11"), "item" : "laptop", "qty" : 5, "price" : 300, "stock" : "instock" }
+{ "_id" : ObjectId("66ad32aeb6df509f0478ed12"), "item" : "tv", "qty" : 5, "price" : 200, "stock" : "instock" }
+>
+>
+> db.orders.find()
+{ "_id" : ObjectId("66ad3401b6df509f0478ed13"), "item" : "computer", "qty" : 2, "price" : 200 }
+{ "_id" : ObjectId("66ad3401b6df509f0478ed14"), "item" : "mobile", "qty" : 2, "price" : 200 }
+{ "_id" : ObjectId("66ad3401b6df509f0478ed15"), "item" : "laptop", "qty" : 2, "price" : 300 }
+{ "_id" : ObjectId("66ad3401b6df509f0478ed16"), "item" : "tv", "qty" : 1, "price" : 500 }
+>
+>
+> db.inventory.aggregate([{$match:{item:"computer"}},
+... {$lookup:{from:"orders",localField:"item",foreignField:"item",as:"order_details"}}]).pretty()
+{
+        "_id" : ObjectId("66ad32aeb6df509f0478ed0f"),
+        "item" : "computer",
+        "qty" : 5,
+        "price" : 200,
+        "stock" : "instock",
+        "order_details" : [
+                {
+                        "_id" : ObjectId("66ad3401b6df509f0478ed13"),
+                        "item" : "computer",
+                        "qty" : 2,
+                        "price" : 200
+                }
+        ]
+}
+>
+> db.inventory.aggregate([{$match:{item:"laptop"}}, {$lookup:{from:"orders",localField:"item",foreignField:"item",as:"order_details"}}]).pretty()
+{
+        "_id" : ObjectId("66ad32aeb6df509f0478ed11"),
+        "item" : "laptop",
+        "qty" : 5,
+        "price" : 300,
+        "stock" : "instock",
+        "order_details" : [
+                {
+                        "_id" : ObjectId("66ad3401b6df509f0478ed15"),
+                        "item" : "laptop",
+                        "qty" : 2,
+                        "price" : 300
+                }
+        ]
+}
+>
+> db.inventory.aggregate([{$match:{item:"mobile"}}, {$lookup:{from:"orders",localField:"item",foreignField:"item",as:"order_details"}}]).pretty()
+{
+        "_id" : ObjectId("66ad32aeb6df509f0478ed10"),
+        "item" : "mobile",
+        "qty" : 5,
+        "price" : 200,
+        "stock" : "instock",
+        "order_details" : [
+                {
+                        "_id" : ObjectId("66ad3401b6df509f0478ed14"),
+                        "item" : "mobile",
+                        "qty" : 2,
+                        "price" : 200
+                }
+        ]
+}
+>
+>
+
+
+

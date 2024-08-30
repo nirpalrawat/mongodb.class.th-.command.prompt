@@ -1,0 +1,89 @@
+> use fullstack
+switched to db fullstack
+> db.teacher.insertOne({name:"ram",city:"gwalior"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668eb629c0b04cdf86892dfc")
+}
+> db.teacher.insertOne({name:"raj",city:"gwalior"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668eb6bfc0b04cdf86892dfd")
+}
+> db.teacher.insertOne({name:"dileep",city:"gwalior"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668eb705c0b04cdf86892dfe")
+}
+> db.teacher.find()
+{ "_id" : ObjectId("668eaadbc0b04cdf86892df9"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eab2cc0b04cdf86892dfa"), "name" : "rohit", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb629c0b04cdf86892dfc"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd"), "name" : "raj", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb705c0b04cdf86892dfe"), "name" : "dileep", "city" : "gwalior" }
+> db.teacher.find({ "_id" : ObjectId("668eb629c0b04cdf86892dfc")})
+{ "_id" : ObjectId("668eb629c0b04cdf86892dfc"), "name" : "ram", "city" : "gwalior" }
+> db.teacher.find({ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd")})
+{ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd"), "name" : "raj", "city" : "gwalior" }
+> db.teacher.updateOne({ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd")},{$set:{name:"mohit"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.teacher.find()
+{ "_id" : ObjectId("668eaadbc0b04cdf86892df9"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eab2cc0b04cdf86892dfa"), "name" : "rohit", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb629c0b04cdf86892dfc"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd"), "name" : "mohit", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb705c0b04cdf86892dfe"), "name" : "dileep", "city" : "gwalior" }
+> db.teacher.updateOne({ "_id" : ObjectId("668eab2cc0b04cdf86892dfa")},{$set:{name:"atul"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.teacher.find()
+{ "_id" : ObjectId("668eaadbc0b04cdf86892df9"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eab2cc0b04cdf86892dfa"), "name" : "atul", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb629c0b04cdf86892dfc"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd"), "name" : "mohit", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb705c0b04cdf86892dfe"), "name" : "dileep", "city" : "gwalior" }
+> db.teacher.deleteOne({ "_id" : ObjectId("668eaadbc0b04cdf86892df9")})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.teacher.find()
+{ "_id" : ObjectId("668eab2cc0b04cdf86892dfa"), "name" : "atul", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb629c0b04cdf86892dfc"), "name" : "ram", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb6bfc0b04cdf86892dfd"), "name" : "mohit", "city" : "gwalior" }
+{ "_id" : ObjectId("668eb705c0b04cdf86892dfe"), "name" : "dileep", "city" : "gwalior" }
+> db.users.insertOne({name:"ram",city:"gwalior",phone:47878387})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668ebe23c0b04cdf86892dff")
+}
+> db.users.insertOne({name:"raj",city:"gwalior",phone:8564654})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668ebe64c0b04cdf86892e00")
+}
+> db.users.insertOne({name:"seeta",city:"gwalior",phone:8564654"})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:64
+> db.users.insertOne({name:"seeta",city:"gwalior",phone:8564654})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("668ebeb9c0b04cdf86892e01")
+}
+> db.users.find()
+{ "_id" : ObjectId("668eb02cc0b04cdf86892dfb"), "name" : "ram", "city" : "gwalior", "phone" : 47545853454 }
+{ "_id" : ObjectId("668ebe23c0b04cdf86892dff"), "name" : "ram", "city" : "gwalior", "phone" : 47878387 }
+{ "_id" : ObjectId("668ebe64c0b04cdf86892e00"), "name" : "raj", "city" : "gwalior", "phone" : 8564654 }
+{ "_id" : ObjectId("668ebeb9c0b04cdf86892e01"), "name" : "seeta", "city" : "gwalior", "phone" : 8564654 }
+> db.users.find({ "_id" : ObjectId("668ebeb9c0b04cdf86892e01")})
+{ "_id" : ObjectId("668ebeb9c0b04cdf86892e01"), "name" : "seeta", "city" : "gwalior", "phone" : 8564654 }
+> db.users.updateOne({ "_id" : ObjectId("668ebeb9c0b04cdf86892e01")},{$set:{name:"geeta"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.users.find()
+{ "_id" : ObjectId("668eb02cc0b04cdf86892dfb"), "name" : "ram", "city" : "gwalior", "phone" : 47545853454 }
+{ "_id" : ObjectId("668ebe23c0b04cdf86892dff"), "name" : "ram", "city" : "gwalior", "phone" : 47878387 }
+{ "_id" : ObjectId("668ebe64c0b04cdf86892e00"), "name" : "raj", "city" : "gwalior", "phone" : 8564654 }
+{ "_id" : ObjectId("668ebeb9c0b04cdf86892e01"), "name" : "geeta", "city" : "gwalior", "phone" : 8564654 }
+> db.users.deleteOne({ "_id" : ObjectId("668ebeb9c0b04cdf86892e01")})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.users.find()
+{ "_id" : ObjectId("668eb02cc0b04cdf86892dfb"), "name" : "ram", "city" : "gwalior", "phone" : 47545853454 }
+{ "_id" : ObjectId("668ebe23c0b04cdf86892dff"), "name" : "ram", "city" : "gwalior", "phone" : 47878387 }
+{ "_id" : ObjectId("668ebe64c0b04cdf86892e00"), "name" : "raj", "city" : "gwalior", "phone" : 8564654 }
+>

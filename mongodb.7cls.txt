@@ -1,0 +1,131 @@
+Microsoft Windows [Version 10.0.19045.4651]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\DELL>mongo
+MongoDB shell version v5.0.28-rc0
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("179477b7-f7ea-4191-bec6-b248c638477b") }
+MongoDB server version: 5.0.28-rc0
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2024-07-24T20:45:49.264+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+> use mit56
+switched to db mit56
+> db.team.insertMany([
+... {name:"ram",city:"gwalior",price:4000},
+... {name:"ak",city:"delhi",price:6000},
+... {name:"ravi",city:"gwalior",price:7000},
+... {name:"vikas",city:"delhi",price:8000}
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66a21281e1b6cba6c41fb4a4"),
+                ObjectId("66a21281e1b6cba6c41fb4a5"),
+                ObjectId("66a21281e1b6cba6c41fb4a6"),
+                ObjectId("66a21281e1b6cba6c41fb4a7")
+        ]
+}
+> db.team.find()
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4"), "name" : "ram", "city" : "gwalior", "price" : 4000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a5"), "name" : "ak", "city" : "delhi", "price" : 6000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a6"), "name" : "ravi", "city" : "gwalior", "price" : 7000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a7"), "name" : "vikas", "city" : "delhi", "price" : 8000 }
+> db.team.find({ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4")})
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4"), "name" : "ram", "city" : "gwalior", "price" : 4000 }
+>  db.team.updateOne({ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4")},{$set:{price:120000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.team.find()
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4"), "name" : "ram", "city" : "gwalior", "price" : 120000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a5"), "name" : "ak", "city" : "delhi", "price" : 6000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a6"), "name" : "ravi", "city" : "gwalior", "price" : 7000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a7"), "name" : "vikas", "city" : "delhi", "price" : 8000 }
+> db.team.find().skip(1)
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a5"), "name" : "ak", "city" : "delhi", "price" : 6000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a6"), "name" : "ravi", "city" : "gwalior", "price" : 7000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a7"), "name" : "vikas", "city" : "delhi", "price" : 8000 }
+> db.team.find().sort({price:-1})
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4"), "name" : "ram", "city" : "gwalior", "price" : 120000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a7"), "name" : "vikas", "city" : "delhi", "price" : 8000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a6"), "name" : "ravi", "city" : "gwalior", "price" : 7000 }
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a5"), "name" : "ak", "city" : "delhi", "price" : 6000 }
+> db.team.find().sort({price:-1}).limit(1)
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a4"), "name" : "ram", "city" : "gwalior", "price" : 120000 }
+> db.team.find().sort({price:-1}).skip(1).limt(1)
+uncaught exception: TypeError: db.team.find(...).sort(...).skip(...).limt is not a function :
+@(shell):1:1
+>  db.team.find().sort({price:-1}).skip(1).limit(1)
+{ "_id" : ObjectId("66a21281e1b6cba6c41fb4a7"), "name" : "vikas", "city" : "delhi", "price" : 8000 }
+> db.orders.insertMany([
+... {cust_id:1,amount:500,status:"A"},
+...  {cust_id:1,amount:600,status:"A"},
+...  {cust_id:1,amount:800,status:"B"},
+...  {cust_id:2,amount:500,status:"A"}
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66a21b03e1b6cba6c41fb4a8"),
+                ObjectId("66a21b03e1b6cba6c41fb4a9"),
+                ObjectId("66a21b03e1b6cba6c41fb4aa"),
+                ObjectId("66a21b03e1b6cba6c41fb4ab")
+        ]
+}
+> db.orders.find()
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "cust_id" : 1, "amount" : 500, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "cust_id" : 1, "amount" : 600, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "cust_id" : 1, "amount" : 800, "status" : "B" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "cust_id" : 2, "amount" : 500, "status" : "A" }
+> db.orders.aggregate([ {$match:{status:"A"}}, {$group:{_id:"$cust_id",total:{$sum:"$amount"}}} ])
+{ "_id" : 1, "total" : 1100 }
+{ "_id" : 2, "total" : 500 }
+> db.orders.distinct('cust_id')
+[ 1, 2 ]
+> db.orders.renameCollection("order123")
+{ "ok" : 1 }
+> show collection
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1169:11
+shellHelper@src/mongo/shell/utils.js:842:15
+@(shellhelp2):1:1
+> show collections
+order123
+team
+> db.order123.updateMany({},{$rename:{"price":"salary"}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 0 }
+> db.orders.find()
+> db.orders123.find()
+> db.order123.find()
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "cust_id" : 1, "amount" : 500, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "cust_id" : 1, "amount" : 600, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "cust_id" : 1, "amount" : 800, "status" : "B" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "cust_id" : 2, "amount" : 500, "status" : "A" }
+> db.order123.aggregate([{$project:{amount:1}}])
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "amount" : 500 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "amount" : 600 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "amount" : 800 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "amount" : 500 }
+>  db.order123.aggregate([{$project:{amount:1,status:1}}])
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "amount" : 500, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "amount" : 600, "status" : "A" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "amount" : 800, "status" : "B" }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "amount" : 500, "status" : "A" }
+>  db.order123.aggregate([{$project:{amount:0,status:0}}])
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "cust_id" : 2 }
+>  db.order123.aggregate([{$project:{amount:0,status:0,id:0}}])
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a8"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4a9"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4aa"), "cust_id" : 1 }
+{ "_id" : ObjectId("66a21b03e1b6cba6c41fb4ab"), "cust_id" : 2 }
+>  db.order123.aggregate([{$project:{amount:1,status:1,id:0}}])

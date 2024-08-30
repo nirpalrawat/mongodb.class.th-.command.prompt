@@ -1,0 +1,51 @@
+> db.rawat.insertMany([
+... {name:"ram",salary:5000,city:"gwalior"},
+... {name:"ravi",salary2000,city:"delhi"},
+... {name:"ak",salary:6000,city:"gwalior"},
+... {name:"dileep",salary:10000,city:"vijaypur"}
+... ])
+uncaught exception: ReferenceError: salary2000 is not defined :
+@(shell):3:14
+>
+>
+>
+> db.rawat.insertMany([
+... {name:"ram",salary:5000,city:"gwalior"},
+... {name:"ravi",salary:2000,city:"delhi"},
+... {name:"ak",salary:6000,city:"gwalior"},
+... {name:"dileep",salary:10000,city:"vijaypur"}
+... ]) 
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("66917bde5b1a58a68639da8b"),
+                ObjectId("66917bde5b1a58a68639da8c"),
+                ObjectId("66917bde5b1a58a68639da8d"),
+                ObjectId("66917bde5b1a58a68639da8e")
+        ]
+}
+> db.rawat.find()
+{ "_id" : ObjectId("66917bde5b1a58a68639da8b"), "name" : "ram", "salary" : 5000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8c"), "name" : "ravi", "salary" : 2000, "city" : "delhi" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8d"), "name" : "ak", "salary" : 6000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8e"), "name" : "dileep", "salary" : 10000, "city" : "vijaypur" }
+>
+> db.rawat.find().sort({salary:-1})
+{ "_id" : ObjectId("66917bde5b1a58a68639da8e"), "name" : "dileep", "salary" : 10000, "city" : "vijaypur" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8d"), "name" : "ak", "salary" : 6000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8b"), "name" : "ram", "salary" : 5000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8c"), "name" : "ravi", "salary" : 2000, "city" : "delhi" }
+>
+>
+> db.rawat.find().sort({salary:-1}).limit(1)
+{ "_id" : ObjectId("66917bde5b1a58a68639da8e"), "name" : "dileep", "salary" : 10000, "city" : "vijaypur" }
+>
+>
+> db.rawat.find().sort({salary:-1}).skip(1)
+{ "_id" : ObjectId("66917bde5b1a58a68639da8d"), "name" : "ak", "salary" : 6000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8b"), "name" : "ram", "salary" : 5000, "city" : "gwalior" }
+{ "_id" : ObjectId("66917bde5b1a58a68639da8c"), "name" : "ravi", "salary" : 2000, "city" : "delhi" }
+>
+> db.rawat.find().sort({salary:-1}).skip(1).limit(1)
+{ "_id" : ObjectId("66917bde5b1a58a68639da8d"), "name" : "ak", "salary" : 6000, "city" : "gwalior" }
+> db.rawat.find().sort({salary:-1}).limit(1)

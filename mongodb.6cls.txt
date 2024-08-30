@@ -1,0 +1,124 @@
+Implicit session: session { "id" : UUID("673733f4-1315-49a3-8168-4e929d47f69c") }
+MongoDB server version: 5.0.28-rc0
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2024-07-11T19:20:06.581+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+> use fullstack
+switched to db fullstack
+> db
+fullstack
+> db.mp.insertMany([{name:"ram",city:"morena"},{name:"raj",city:"bhind"},{name:"mohit",city:"gwalior"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6697f35b2bde6aefec30dd50"),
+                ObjectId("6697f35b2bde6aefec30dd51"),
+                ObjectId("6697f35b2bde6aefec30dd52")
+        ]
+}
+> db.mp.find()
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "name" : "ram", "city" : "morena" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "name" : "raj", "city" : "bhind" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "name" : "mohit", "city" : "gwalior" }
+> db.mp.find().limit()
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "name" : "ram", "city" : "morena" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "name" : "raj", "city" : "bhind" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "name" : "mohit", "city" : "gwalior" }
+> db.mp.find().limit(1)
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "name" : "ram", "city" : "morena" }
+> db.mp.find().count()
+3
+> db.mp.find().skip(1)
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "name" : "raj", "city" : "bhind" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "name" : "mohit", "city" : "gwalior" }
+> db.mp.find().sort({city:-1})
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "name" : "ram", "city" : "morena" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "name" : "mohit", "city" : "gwalior" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "name" : "raj", "city" : "bhind" }
+> db.mp.find()
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "name" : "ram", "city" : "morena" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "name" : "raj", "city" : "bhind" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "name" : "mohit", "city" : "gwalior" }
+> db.mp12.rename
+fullstack.mp12.rename
+> db.mp.renameCollection("pn34")
+{ "ok" : 1 }
+> show collctions
+uncaught exception: Error: don't know how to show [collctions] :
+shellHelper.show@src/mongo/shell/utils.js:1169:11
+shellHelper@src/mongo/shell/utils.js:842:15
+@(shellhelp2):1:1
+> show collections
+pn34
+student
+teacher
+user
+users
+> db.pn34.updateMany({},$rename:{"name":"fname"}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:29
+> db.pn34.updateMany({},$rename:{"name":"fname"}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:29
+>  db.pn34.updateMany({},{$rename:{"name":"fname"}})
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+> db.pn34.find()
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd50"), "city" : "morena", "fname" : "ram" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd51"), "city" : "bhind", "fname" : "raj" }
+{ "_id" : ObjectId("6697f35b2bde6aefec30dd52"), "city" : "gwalior", "fname" : "mohit" }
+>
+>
+>
+> db.up.insertMany([
+... {custId:1,price:400,name:"ram"},
+...  {custId:1,price:500,name:"ram"},
+...  {custId:3,price:700,name:"ram"},
+...  {custId:3,price:400,name:"ram"},
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6697fbee2bde6aefec30dd53"),
+                ObjectId("6697fbee2bde6aefec30dd54"),
+                ObjectId("6697fbee2bde6aefec30dd55"),
+                ObjectId("6697fbee2bde6aefec30dd56")
+        ]
+}
+> db.up.find({price:{$lt:500}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd53"), "custId" : 1, "price" : 400, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd56"), "custId" : 3, "price" : 400, "name" : "ram" }
+> db.up.find({price:{$lt:500}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd53"), "custId" : 1, "price" : 400, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd56"), "custId" : 3, "price" : 400, "name" : "ram" }
+>  db.up.find({price:{$lte:500}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd53"), "custId" : 1, "price" : 400, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd54"), "custId" : 1, "price" : 500, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd56"), "custId" : 3, "price" : 400, "name" : "ram" }
+>  db.up.find({price:{$gt:500}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd55"), "custId" : 3, "price" : 700, "name" : "ram" }
+>  db.up.find({price:{$gte:500}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd54"), "custId" : 1, "price" : 500, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd55"), "custId" : 3, "price" : 700, "name" : "ram" }
+> db.up.find()
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd53"), "custId" : 1, "price" : 400, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd54"), "custId" : 1, "price" : 500, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd55"), "custId" : 3, "price" : 700, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd56"), "custId" : 3, "price" : 400, "name" : "ram" }
+> db.up.find({name:{$in:["ram","ravi"]}})
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd53"), "custId" : 1, "price" : 400, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd54"), "custId" : 1, "price" : 500, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd55"), "custId" : 3, "price" : 700, "name" : "ram" }
+{ "_id" : ObjectId("6697fbee2bde6aefec30dd56"), "custId" : 3, "price" : 400, "name" : "ram" }
+>
+
+
+
+
